@@ -1,4 +1,4 @@
-# app_despesas_pessoais
+# Expenses App
 
 A new Flutter project.
 
