@@ -34,26 +34,37 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
+  }
+
+  double get _weekTotalValue {
+    return groupedTransactions.fold(0.0, (sum, tr) => sum + tr['value']);
   }
 
   @override
   Widget build(BuildContext context) {
-    groupedTransactions;
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransactions.map(
-          (tr) {
-            return ChartBar(
-              label: tr['day'],
-              value: tr['value'],
-              percent: 0.0,
-            );
-          },
-        ) //fazer essa bosta de chart bar
-            .toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions.map(
+            (tr) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                  label: tr['day'],
+                  value: tr['value'],
+                  percent: _weekTotalValue == 0
+                      ? 0.0
+                      : tr['value'] / _weekTotalValue,
+                ),
+              );
+            },
+          ).toList(),
+        ),
       ),
     );
   }
