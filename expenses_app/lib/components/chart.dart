@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, sized_box_for_whitespace
 
 import 'package:app_despesas_pessoais/models/transaction.dart';
 import 'package:flutter/material.dart';
